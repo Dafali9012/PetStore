@@ -1,10 +1,14 @@
 public class PetStore {
     private static final PetStore instance = new PetStore();
-    private static int animalsLeft = 100;
+    private static int animalStock = 100;
 
-    public static Pet getPet() {
-        animalsLeft--;
-        return new Pet();
+    public PetStore() {
+
+    }
+
+    public Pet sellPet() {
+        animalStock--;
+        return new Pet(NameGenerator.expendPetName());
     }
 
     public static PetStore getInstance() {

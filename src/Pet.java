@@ -1,21 +1,21 @@
+import enums.Species;
+
 import java.security.SecureRandom;
 
 public class Pet {
-    String[] species = {"Fox", "Goat", "Hedgehog", "Squirrel", "Turtle"};
-    String thisSpecies;
-    private String name;
+    private SecureRandom sr = new SecureRandom();
+    private  String name;
+    private  String species = Species.values()[sr.nextInt(Species.values().length)].toString();
 
-    public Pet() {
-        this.name = PetNameGenerator.getPetName();
-        SecureRandom sr = new SecureRandom();
-        thisSpecies = species[sr.nextInt(5)];
+    public Pet(String name) {
+        this.name = name;
+    }
+
+    public String getSpecies() {
+        return species;
     }
 
     public String getName() {
         return name;
-    }
-
-    public String getSpecies() {
-        return thisSpecies;
     }
 }
