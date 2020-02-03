@@ -1,3 +1,4 @@
+import javax.naming.Name;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,6 +16,7 @@ public class Program {
     }
 
     private void generatePeople(int amount) {
+
         while(amount > 0) {
             Person person = new Person(NameGenerator.expendPersonName());
             int petAmount = sr.nextInt(6);
