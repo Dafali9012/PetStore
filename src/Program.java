@@ -1,4 +1,5 @@
-import javax.naming.Name;
+import enums.Sorting;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,15 +13,15 @@ public class Program {
 
     public Program() {
         generatePeople(20);
-        printPeople();
+        printPeople(Sorting.NAME);
     }
 
     private void generatePeople(int amount) {
 
-        while(amount > 0) {
+        while (amount > 0) {
             Person person = new Person(NameGenerator.expendPersonName());
             int petAmount = sr.nextInt(6);
-            while(petAmount > 0) {
+            while (petAmount > 0) {
                 person.acquirePet(petStore.sellPet());
                 petAmount--;
             }
@@ -29,11 +30,19 @@ public class Program {
         }
     }
 
-    private void printPeople() {
-        people.stream()
-        .filter(p -> p.getPets().size() > 0)
-        .sorted(Comparator.comparingInt(p -> p.getPets().size()))
-        .forEach(p -> System.out.println(p.toString()));
+    private void printPeople(Sorting sortBy) {
+        if (sortBy == Sorting.NAME) {
+            people.stream()
+                    .filter(p -> p.getPets().size() > 0)
+                    .sorted(Comparator.comparing(Person::getName))
+                    .forEach(p -> System.out.println(p.toString()));
+        }
+        if (sortBy == Sorting.NUM_ANIMALS) {
+            people.stream()
+                    .filter(p -> p.getPets().size() > 0)
+                    .sorted(Comparator.comparingInt(p -> p.getPets().size()))
+                    .forEach(p -> System.out.println(p.toString()));
+        }
     }
 
     public static Program getInstance() {

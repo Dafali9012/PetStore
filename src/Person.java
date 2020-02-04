@@ -40,7 +40,7 @@ public class Person {
             return String.format("%s (%d) owns the animals: [%s]", name, age,
             pets.stream()
             .collect(groupingBy(Pet::getSpecies)).entrySet().stream()
-            .map(o -> o.getKey()+"s: "+o.getValue().stream().map(Pet::getName).collect(Collectors.joining(", ")))
+            .map(o -> (o.getKey()=="Fox")?"Foxes: ":o.getKey()+"s: "+o.getValue().stream().map(Pet::getName).collect(Collectors.joining(", ")))
             .collect(Collectors.joining(" | ")));
         }
     }
